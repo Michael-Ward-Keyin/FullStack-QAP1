@@ -1,6 +1,6 @@
 const process = require('process');
 
-const validOptions = ['help', 'length'];
+const validOptions = ['help', 'length', 'upper'];
 const arguments = process.argv.slice(2);
 const userChoice = arguments[0];
 const lengthChoice = arguments[1]
@@ -11,6 +11,15 @@ if (!validOptions.includes(userChoice)) {
 }
 function makePassword(length) { // Creates the password based on length input
     const letters ='qwertyuiopalskdjfhgmznxbcv'
+    let password = ''
+    for (let i = 0; i < length; i++) {
+        password += letters[Math.floor(Math.random() * letters.length)]
+    } 
+    return password
+}
+
+function makePasswordUpper(length) { // Creates the password based on length input including uppercase letters
+    const letters ='qwertyuiopalskdjfhgmznxbcvQPWOEIRUTYALSKDJFHGMZNXBCV'
     let password = ''
     for (let i = 0; i < length; i++) {
         password += letters[Math.floor(Math.random() * letters.length)]
@@ -33,6 +42,16 @@ function determineInput(userChoice) { // Determines the users input and produces
             : parseInt(lengthChoice);
         
         const password = makePassword(length)
+        console.log(`password: ${password}`)
+    }
+    
+    if (userChoice === 'upper') {
+
+        const length = (!lengthChoice || isNaN(parseInt(lengthChoice)) || parseInt(lengthChoice) <= 0)
+            ? 8 // Default to 8 if no valid length is provided
+            : parseInt(lengthChoice);
+        
+        const password = makePasswordUpper(length)
         console.log(`password: ${password}`)
     }
 }
