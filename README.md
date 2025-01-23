@@ -1,3 +1,5 @@
+App Name: QAP1
+
 Can be used to create passwords for the user
 
 typing help as a command will bring up your options.
